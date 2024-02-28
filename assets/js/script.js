@@ -1,61 +1,77 @@
+//BONUS : More Difficulties
+
+let diffSelector = document.getElementById('difficulty')
+diffSelector = diffSelector.value
+let easyMode = document.getElementById('easy')
+easyMode = easyMode.value
+let mediumMode = document.getElementById('medium')
+mediumMode = mediumMode.value
+let hardMode = document.getElementById('hard')
+
+
+console.log(easyMode, mediumMode, hardMode)
+
 //BUTTON : grid Generation
 let gridGenerator = document.getElementById('play');
 let grid = document.getElementById('grid')
-let nCellMax = 100;
+let nCellMaxEasy = 100;
+let nCellMaxMedium = 81;
+let nCellMaxHard = 49;
+
 console.log(grid)
+console.log(diffSelector, mediumMode)
+console.log(diffSelector, easyMode)
 
 gridGenerator.addEventListener('click', function () {
     grid.style.display = 'flex'
 })
 
-//cicle for : cell Generation + index Number inside
 
-for (let i = 1; i < nCellMax + 1; i++) {
-    //cell
-    const cell = document.createElement('div')
+//cicle for : cell Generation + index Number inside + difficulty
+if (diffSelector == easyMode)
+    for (let i = 1; i < nCellMaxEasy + 1; i++) {
+        //cell
+        const cell = document.createElement('div')
 
-    cell.classList.add('cell');
-    grid.appendChild(cell);
-    colorChangeClicker(cell) // INVOKE
+        cell.classList.add('cell');
+        grid.appendChild(cell);
+        colorChangeClicker(cell, 'blue') // INVOKE
 
-    /* cell.style.position = 'relative' */
+        //cellNumber
+        let cellNumber = document.createElement('div')
+        cellNumber.innerHTML = i
 
-    //cellNumber
-    let cellNumber = document.createElement('div')
-    cellNumber.innerHTML = i
-
-    cellNumber.classList.add('cellnumber')
-    cell.appendChild(cellNumber)
-
-    /*  cellNumber.style.position = 'absolute'
-    cellNumber.style.top = '50%'
-    cellNumber.style.left = '50%'
-    cellNumber.style.transform = 'translate(-50%,-50%)' */
-    /* cellNumber.style.backgroundColor = 'black'
-    cellNumber.style.color = 'white'
-    cellNumber.style.borderRadius = '50px'
-    cellNumber.style.padding = '4px' */
-
-}
+        cellNumber.classList.add('cellnumber')
+        cell.appendChild(cellNumber)
 
 
-// Event : cell Onclick = backgroundColor= 'red'
+    } else if (diffSelector == mediumMode) {
 
-/* cell.addEventListener('click', function colorChangeClicker(e) {
-    cell.classList.toggle('red');
-}) */
+        for (let i = 1; i < nCellMaxMedium + 1; i++) {
+            //cell
+            const cell = document.createElement('div')
+
+            cell.classList.add('cell');
+            grid.appendChild(cell);
+            colorChangeClicker(cell, 'red') // INVOKE
+
+            //cellNumber
+            let cellNumber = document.createElement('div')
+            cellNumber.innerHTML = i
+
+            cellNumber.classList.add('cellnumber')
+            cell.appendChild(cellNumber)
+        }
+    }
 
 /**
  * Change color on click
  * @param {Element} e 
- */
+*/
 
-function colorChangeClicker(e) {
+function colorChangeClicker(e, color) {
     e.addEventListener('click', function () {
-        e.classList.toggle('red')
+        e.classList.toggle(color)
     })
 
 }
-
-
-
