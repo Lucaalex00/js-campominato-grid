@@ -16,6 +16,8 @@ for (let i = 1; i < nCellMax + 1; i++) {
 
     cell.classList.add('cell');
     grid.appendChild(cell);
+    colorChangeClicker(cell) // INVOKE
+
     /* cell.style.position = 'relative' */
 
     //cellNumber
@@ -26,12 +28,34 @@ for (let i = 1; i < nCellMax + 1; i++) {
     cell.appendChild(cellNumber)
 
     /*  cellNumber.style.position = 'absolute'
-     cellNumber.style.top = '50%'
-     cellNumber.style.left = '50%'
-     cellNumber.style.transform = 'translate(-50%,-50%)' */
+    cellNumber.style.top = '50%'
+    cellNumber.style.left = '50%'
+    cellNumber.style.transform = 'translate(-50%,-50%)' */
     /* cellNumber.style.backgroundColor = 'black'
     cellNumber.style.color = 'white'
     cellNumber.style.borderRadius = '50px'
     cellNumber.style.padding = '4px' */
 
 }
+
+
+// Event : cell Onclick = backgroundColor= 'red'
+
+/* cell.addEventListener('click', function colorChangeClicker(e) {
+    cell.classList.toggle('red');
+}) */
+
+/**
+ * Change color on click
+ * @param {Element} e 
+ */
+
+function colorChangeClicker(e) {
+    e.addEventListener('click', function () {
+        e.classList.toggle('red')
+    })
+
+}
+
+
+
