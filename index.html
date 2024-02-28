@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>js campominato</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        background-color: #cecece;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .show {
+        display: block;
+    }
+
+    /* /UTILITIES*/
+
+    #header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: auto;
+        background-color: white;
+        padding: 0 1rem;
+
+
+        >.left {
+            display: flex;
+            align-items: center;
+
+            >img {
+                width: 50px;
+            }
+        }
+
+        >.right {
+            >#play {
+                background-color: pink;
+                width: 100px;
+            }
+        }
+    }
+
+    /* /HEADER*/
+
+    #main {
+        margin: auto;
+        padding: 1rem;
+        background-color: paleturquoise;
+
+        >#grid {
+            width: 602px;
+            /* 600 + border:2px */
+            height: 100%;
+            border: 1px solid black;
+            display: none;
+            margin: auto;
+            flex-wrap: wrap;
+
+            >.cell {
+                width: 60px;
+                height: 60px;
+                border: 1px dashed black;
+            }
+        }
+    }
+</style>
+
+<body>
+    <div id="header">
+        <div class="left">
+            <img src="./assets/img/mobile-logo.png" alt="BOOLEAN LOGO">
+            <h1>Campo Minato</h1>
+        </div>
+        <div class="right">
+            <button id="play">Play</button>
+        </div>
+
+    </div>
+
+    <!-- /#header -->
+    <div id="main">
+        <div id="grid">
+
+        </div>
+    </div>
+    <!-- /#main -->
+    <div id="footer">
+
+    </div>
+    <!-- /#footer -->
+    <script src="./assets/js/script.js"></script>
+</body>
+
+</html>
