@@ -1,7 +1,7 @@
 
 /* IIFE */
 
-
+/* INITIALIZE FUNCTION + Field Generator */
 (function () {
     console.log('hi there');
     // select the magic field
@@ -85,3 +85,26 @@ function generateMagicCell(numb, size) {
 
     return nodeCellElement;
 }
+
+
+/////////////////////////////////////
+
+
+// create a function from w3schools for math.random (min max)
+
+// make an empty array
+
+// cicle for or while to generate bombs x 16 times (NO REPEAT) and insert in array
+//check if the random number is .includes in the array
+//if not included, array.push
+
+//read the number inside the clicked cell
+//if the clicked cell number is .includes in the array
+//if true, console.log(you lose) and classList.add ('red')
+//end the game
+//Else add classList.add('blue')
+
+// keep and stamp the count of the clicked cells
+// end the game
+//if the clicked cell is equal to maxcell - bombnumber= console.log('you win')
+//prevent the user from clicking again after the game is over.
