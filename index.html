@@ -29,6 +29,10 @@
         background-color: palegreen;
     }
 
+    .red {
+        background-color: red;
+    }
+
     /* /UTILITIES*/
 
     #header {
@@ -68,6 +72,7 @@
         height: 90vh;
         display: flex;
         align-items: center;
+        position: relative;
 
 
         >#field {
@@ -83,7 +88,51 @@
 
             }
         }
+
+        >#lose_screen {
+            position: absolute;
+            background-color: rgba(255, 0, 0, 0.26);
+            z-index: 1;
+            width: 100%;
+            right: 0;
+            height: 100%;
+            border: 1px solid black;
+            display: none;
+        }
+
+        >#win_screen {
+            position: absolute;
+            background-color: rgba(0, 255, 42, 0.329);
+            z-index: 1;
+            width: 100%;
+            right: 0;
+            height: 100%;
+            border: 1px solid black;
+            display: none;
+        }
+
+        /* display: none; */
+        h1 {
+            position: absolute;
+            right: 50%;
+            bottom: 50%;
+            transform: translate(+50%, +50%);
+            text-shadow: 2px 3px red;
+            font-size: 5rem;
+        }
+
+        #points {
+            font-size: 3rem;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.39);
+            border-radius: 10%;
+            width: 100px;
+            margin: auto;
+            margin-top: 10%;
+            text-align: center;
+        }
     }
+
 
     /* /MAIN*/
 
@@ -123,6 +172,19 @@
 
     <!-- /#header -->
     <div id="main">
+        <div id="lose_screen">
+            <h1>
+                You Lose !
+            </h1>
+            <div id="points"></div>
+        </div>
+        <div id="win_screen">
+            <h1>
+                You win !
+            </h1>
+            <div id="points"></div>
+        </div>
+
         <div id="field">
 
         </div>

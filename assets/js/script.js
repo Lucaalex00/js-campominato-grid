@@ -11,14 +11,11 @@
     // select the play button from the dom to start the game
     document.querySelector('form').addEventListener('submit', function (e) {
 
-        // Bonus 
         // step 1. prevent default behaviour
         e.preventDefault(); // no page update
         // step 2. read the selected level
         console.log(e.target.level.value);
         const cellsNumber = e.target.level.value;
-        // step 3. use the selected level to generate the magic field
-
 
         // STEPS
         // Start the game
@@ -30,15 +27,23 @@
 
 })();
 
-
 /**
- * Generate Game's Field
+ * Generate Game's Field & Reset board/points
  * @param {*} fieldDomElement 
  * @param {*} level 
  */
 function generateMagicField(fieldDomElement, level) {
     // Empty the magic field before adding new cells
     fieldDomElement.innerHTML = '';
+    // Hide lose/win Screen
+    let endGameScreen = document.getElementById('lose_screen')
+    endGameScreen.style.display = 'none'
+    let winGameScreen = document.getElementById('win_screen')
+    winGameScreen.style.display = 'none'
+    //set points to 0
+    clickCounter = document.getElementById('points');
+    clickCounter.innerHTML = 0;
+
 
     mushList = mushroomGenerate(); // genero numeri casuali per i funghi
     console.log(mushList);
@@ -59,8 +64,6 @@ function generateMagicField(fieldDomElement, level) {
     }
 }
 
-
-
 /**
  * Generate Mushrooms x 16
  * @param {Array} array 
@@ -69,11 +72,16 @@ function generateMagicField(fieldDomElement, level) {
 function mushroomGenerate() {
 
     // cicle for or while to generate mush x 16 times (NO REPEAT) and insert in array
+    let mushrooms = [];
+
+    //make random number of mush FOR any type of level difficulty
+    let levelDifficulty = document.getElementById('level')
+    const cellsNumber = levelDifficulty.value;
+
     //check if the random number is .includes in the array
     //if not included, array.push
-    let mushrooms = [];
     for (let i = 0; i < 16; i++) {
-        let getRandomNumber = getRndInteger(1, 100)
+        let getRandomNumber = getRndInteger(1, cellsNumber)
         if (!mushrooms.includes(getRandomNumber)) {
             mushrooms.push(getRandomNumber);
         } else {
@@ -85,41 +93,56 @@ function mushroomGenerate() {
 }
 
 /**
- * Change on click : Color
- * @param {*} node 
+ * Change on click : Color & tell to cell if are mushroom or not
+ * @param {Object} node 
 */
 function attachEventToMagicCell(node) {
     node.addEventListener('click', function (e) {
+
         // add a active class to the clicked element
-        console.log(this, e); // this é il nodo della dom in questo contesto - e é l'evento triggerato
+        /* console.log(this, e); */ // !DEBUG! // this é il nodo della dom in questo contesto - e é l'evento triggerato
         this.classList.toggle('bg-active');
         // print into the console the cell number
-        console.log(this.innerText);
+        /* console.log(this.innerText); */ //!DEBUG!
         /* this.innerText = 'x' */
-
-
-
-
-        //if true, console.log(you lose) and classList.add ('red')
-        //end the game
-        //Else add classList.add('blue')
 
         //read the number inside the clicked cell
         let cellNumber = parseInt(node.innerText);
-        console.log(cellNumber);
-        console.log(mushList);
-        // make an empty array                    
-
+        console.log(cellNumber); //STAMP CLICKED CELL NUMBER
+        console.log(mushList); //STAMP MUSHROOMS LIST
         // se il nuemro della cella cliccato include un numero dei funghi, hai perso
-        console.log(mushList.includes(cellNumber));
+        /* console.log(mushList.includes(cellNumber)); */ //!DEBUG!
+        //make a counter variable and increment any times the user click on a cell WITHOUT mushrooms
+
+        clickCounter = document.getElementById('points');
+        //if true, console.log(you lose) and classList.add ('red')
+        //end the game
+        //Else add classList.add('blue')
         if (mushList.includes(cellNumber)) {
-            console.log('ciao')
+            console.log('You Lose !!! ')
+            node.classList.add('red')
+            node.innerText = '😢'
+            /* console.log(clickCounter); */
+
+            //Keep from DOM the ENDGAME DISPLAY
+            let endGameScreen = document.getElementById('lose_screen')
+            endGameScreen.style.display = 'block'
+
         } else {
-            console.log('else');
+            (clickCounter.innerText)++;
+            let counterValue = clickCounter.innerText
+            let levelDifficulty = document.getElementById('level')
+            const cellsNumber = levelDifficulty.value;
+            /* console.log(cellsNumber); */ //!DEBUG!
+            /* console.log(counterValue) */ //!DEBUG!
+            if (counterValue == cellsNumber - 1) {
+                let winGameScreen = document.getElementById('win_screen')
+                winGameScreen.style.display = 'block'
+            }
+
         }
 
     })
-
 }
 
 /**
@@ -129,17 +152,13 @@ function attachEventToMagicCell(node) {
  * @returns 
 */
 function generateMagicCell(numb, size) {
-    const nodeCellElement = document.createElement('div')
+    nodeCellElement = document.createElement('div')
     nodeCellElement.classList.add('cell')
     nodeCellElement.innerText = numb
     nodeCellElement.style.width = `calc(100% / ${Math.sqrt(size)})`
 
     return nodeCellElement;
 }
-
-
-/////////////////////////////////////
-
 
 // create a function from w3schools for math.random (min max)
 /**
@@ -151,13 +170,3 @@ function generateMagicCell(numb, size) {
 function getRndInteger(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-
-
-
-
-
-
-// keep and stamp the count of the clicked cells
-// end the game
-//if the clicked cell is equal to maxcell - bombnumber= console.log('you win')
-//prevent the user from clicking again after the game is over.
