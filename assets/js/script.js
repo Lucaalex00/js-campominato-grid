@@ -1,77 +1,87 @@
-//BONUS : More Difficulties
 
-let diffSelector = document.getElementById('difficulty')
-diffSelector = diffSelector.value
-let easyMode = document.getElementById('easy')
-easyMode = easyMode.value
-let mediumMode = document.getElementById('medium')
-mediumMode = mediumMode.value
-let hardMode = document.getElementById('hard')
+/* IIFE */
 
 
-console.log(easyMode, mediumMode, hardMode)
+(function () {
+    console.log('hi there');
+    // select the magic field
+    const magicField = document.getElementById('field');
 
-//BUTTON : grid Generation
-let gridGenerator = document.getElementById('play');
-let grid = document.getElementById('grid')
-let nCellMaxEasy = 100;
-let nCellMaxMedium = 81;
-let nCellMaxHard = 49;
+    // select the play button from the dom to start the game
+    document.querySelector('form').addEventListener('submit', function (e) {
 
-console.log(grid)
-console.log(diffSelector, mediumMode)
-console.log(diffSelector, easyMode)
-
-gridGenerator.addEventListener('click', function () {
-    grid.style.display = 'flex'
-})
-
-
-//cicle for : cell Generation + index Number inside + difficulty
-if (diffSelector == easyMode)
-    for (let i = 1; i < nCellMaxEasy + 1; i++) {
-        //cell
-        const cell = document.createElement('div')
-
-        cell.classList.add('cell');
-        grid.appendChild(cell);
-        colorChangeClicker(cell, 'blue') // INVOKE
-
-        //cellNumber
-        let cellNumber = document.createElement('div')
-        cellNumber.innerHTML = i
-
-        cellNumber.classList.add('cellnumber')
-        cell.appendChild(cellNumber)
+        // Bonus 
+        // step 1. prevent default behaviour
+        e.preventDefault(); // no page update
+        // step 2. read the selected level
+        console.log(e.target.level.value);
+        const cellsNumber = e.target.level.value;
+        // step 3. use the selected level to generate the magic field
 
 
-    } else if (diffSelector == mediumMode) {
+        // STEPS
+        // Start the game
+        console.log('Start the game - show the magic field');
 
-        for (let i = 1; i < nCellMaxMedium + 1; i++) {
-            //cell
-            const cell = document.createElement('div')
+        generateMagicField(magicField, cellsNumber)
 
-            cell.classList.add('cell');
-            grid.appendChild(cell);
-            colorChangeClicker(cell, 'red') // INVOKE
-
-            //cellNumber
-            let cellNumber = document.createElement('div')
-            cellNumber.innerHTML = i
-
-            cellNumber.classList.add('cellnumber')
-            cell.appendChild(cellNumber)
-        }
-    }
-
-/**
- * Change color on click
- * @param {Element} e 
-*/
-
-function colorChangeClicker(e, color) {
-    e.addEventListener('click', function () {
-        e.classList.toggle(color)
     })
 
+})();
+
+
+/**
+ * Generate Game's Field
+ * @param {*} fieldDomElement 
+ * @param {*} level 
+ */
+function generateMagicField(fieldDomElement, level) {
+    // Empty the magic field before adding new cells
+    fieldDomElement.innerHTML = '';
+    // generate the magic field 
+    for (let i = 1; i <= level; i++) {
+
+        // generate the single cell
+        const nodeCellElement = generateMagicCell(i, level);
+
+        /*  console.log(nodeCellElement); */
+
+
+        // add to the cell an event listener
+        attachEventToMagicCell(nodeCellElement)
+
+        fieldDomElement.insertAdjacentElement('beforeend', nodeCellElement)
+    }
+
+}
+
+/**
+ * Change on click : Color
+ * @param {*} node 
+ */
+function attachEventToMagicCell(node) {
+    node.addEventListener('click', function (e) {
+        // add a active class to the clicked element
+        console.log(this, e); // this é il nodo della dom in questo contesto - e é l'evento triggerato
+        this.classList.toggle('bg-active');
+        // print into the console the cell number
+        console.log(this.innerText);
+        /* this.innerText = '🍄' */
+    })
+
+}
+
+/**
+ * Generate numb of cell
+ * @param {*} numb 
+ * @param {*} size 
+ * @returns 
+ */
+function generateMagicCell(numb, size) {
+    const nodeCellElement = document.createElement('div')
+    nodeCellElement.classList.add('cell')
+    nodeCellElement.innerText = numb
+    nodeCellElement.style.width = `calc(100% / ${Math.sqrt(size)})`
+
+    return nodeCellElement;
 }
