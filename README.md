@@ -33,7 +33,7 @@ Le validazioni e i controlli possiamo farli anche in un secondo momento.
 # Consegna 2-day
 
 # Consegna
-- Continuate a lavorare nella stessa repo di ieri. :puntare_a_sinistra:
+- Continuate a lavorare nella stessa repo di ieri.
 Il computer deve generare 16 numeri casuali nello stesso range della difficoltà prescelta: i funghi magici.
 
 ### Attenzione: nella stessa cella può essere posizionato al massimo un fungo, perciò nell’array dei funghi non potranno esserci due numeri uguali.
@@ -71,4 +71,5 @@ Nota: Se non vi piacciono i funghi ù potete usare fiori o cacca basta che non m
 - keep and stamp the count of the clicked cells
 - end the game
 - if the clicked cell is equal to maxcell - bombnumber= console.log('you win')
+
 - prevent the user from clicking again after the game is over.
